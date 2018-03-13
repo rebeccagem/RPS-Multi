@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>RPS</title>
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./Assets/Css/style.css">
+
+</head>
+
+<body>
+
+
+
+    
+    <!-- Added link to the Firebase Project -->
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDnTE5IOlPaBkn0ifmYJctJQZatpZsQgmw",
+            authDomain: "rps-multi-d274c.firebaseapp.com",
+            databaseURL: "https://rps-multi-d274c.firebaseio.com",
+            projectId: "rps-multi-d274c",
+            storageBucket: "rps-multi-d274c.appspot.com",
+            messagingSenderId: "638311220591"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="./assets/javascript/game.js"></script>
+
+
+</body>
+
+</html>
