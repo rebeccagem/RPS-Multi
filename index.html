@@ -9,14 +9,81 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./Assets/Css/style.css">
+    <!-- Font Awesome CSS Icons (For cool glyphicons) -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 </head>
 
 <body>
 
+    <div class="container">
+        <!-- Jumbotron for Title -->
+        <div class="jumbotron bg-light">
+            <h1 class="text-center">
+                <strong>
+                    <i class="fas fa-hand-scissors"></i>&nbspRock Paper Scissors</strong>
+            </h1>
+            <div class="row justify-content-center">
+                <div class="input-group mb-3 col-md-4" id="userNameInput">
+                    <input type="text" class="form-control" placeholder="What's your name?" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-info btn-outline-secondary" type="button">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!--Player 1 Info-->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="oneButtonGrp">
+                            <button type="button" id="oneRock" class="btn btn-info btn-lg btn-block">Rock</button>
+                            <button type="button" id="onePaper" class="btn btn-info btn-lg btn-block">Paper</button>
+                            <button type="button" id="oneScissors" class="btn btn-info btn-lg btn-block">Scissors</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Battle Ground-->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center" id="battleGround">
+                        <p>Battle Ground</p>
+                    </div>
+                </div>
+            </div>
+            <!--Player 2 Info-->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="twoButtonGrp">
+                            <button type="button" id="twoRock" class="btn btn-info btn-lg btn-block">Rock</button>
+                            <button type="button" id="twoPaper" class="btn btn-info btn-lg btn-block">Paper</button>
+                            <button type="button" id="twoScissors" class="btn btn-info btn-lg btn-block">Scissors</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class ="col-md-6">
+                    <div class="card" id="chatBox">
+                            <div class="card-body">
+                                    <p class="text-center">Say hello to your opponent!</p>
+                                    <div class="input-group mb-3" id="chatBoxInput">
+                                            <input type="text" class="form-control" placeholder="GLHF C:" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-info" type="button">Send</button>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
 
 
-    
     <!-- Added link to the Firebase Project -->
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
     <script>

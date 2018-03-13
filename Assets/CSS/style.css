@@ -1,3 +1,38 @@
 body{
     background-color:rgb(255, 208, 0);
 }
+
+.jumbotron {
+    padding: .6rem;
+    margin-top: 20px;
+}
+
+#userNameInput {
+    margin-top:15px;
+}
+
+.btn-outline-secondary {
+    color:#ffffff;
+    background-color: rgb(187, 0, 0);
+border-color:rgb(124, 0, 0); 
+}
+
+.btn-outline-secondary:hover{
+    color:#ffffff;
+    background-color: rgb(250, 0, 0);
+border-color:rgb(163, 0, 0); 
+}
+.btn-outline-secondary:active{
+    color:#ffffff;
+    background-color: rgb(250, 0, 0);
+border-color:rgb(163, 0, 0); 
+}
+
+#chatBox{
+    margin:25px 0px;
+}
+
+#chatBoxInput {
+    display: flex;
+    justify-content: flex-end;
+}
