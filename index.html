@@ -15,27 +15,30 @@
 </head>
 
 <body>
-
     <div class="container">
-        <!-- Jumbotron for Title -->
-        <div class="jumbotron bg-light">
-            <h1 class="text-center">
-                <strong>
-                    <i class="fas fa-hand-scissors"></i>&nbspRock Paper Scissors</strong>
-            </h1>
-            <div class="row justify-content-center">
-                <div class="input-group mb-3 col-md-4" id="userNameInput">
-                    <input type="text" class="form-control" placeholder="What's your name?" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-info btn-outline-secondary" type="button">Submit</button>
+        <div class="row justify-content-center ">
+            <div class="col-md-8">
+                <!-- Jumbotron for Title -->
+                <div class="jumbotron bg-light card">
+                    <h1 class="text-center">
+                        <strong>
+                            <i class="fas fa-hand-scissors"></i>&nbspRock Paper Scissors</strong>
+                    </h1>
+                    <div class="row justify-content-center" id="underTitle">
+                        <div class="input-group mb-3 col-md-7" id="userNameInputContainer">
+                            <input type="text" class="form-control" placeholder="What's your name?" aria-label="Recipient's username" aria-describedby="basic-addon2" id="userNameInput">
+                            <div class="input-group-append">
+                                <button class="btn btn-info btn-outline-secondary" type="submit" id="userNameSubmit">Submit</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-center">
             <!--Player 1 Info-->
             <div class="col-md-4">
-                <div class="card">
+                <div class="card" id="playerOneCard">
                     <div class="card-body">
                         <div class="oneButtonGrp">
                             <button type="button" id="oneRock" class="btn btn-info btn-lg btn-block">Rock</button>
@@ -45,17 +48,9 @@
                     </div>
                 </div>
             </div>
-            <!--Battle Ground-->
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body text-center" id="battleGround">
-                        <p>Battle Ground</p>
-                    </div>
-                </div>
-            </div>
             <!--Player 2 Info-->
             <div class="col-md-4">
-                <div class="card">
+                <div class="card" id="playerTwoCard">
                     <div class="card-body">
                         <div class="twoButtonGrp">
                             <button type="button" id="twoRock" class="btn btn-info btn-lg btn-block">Rock</button>
@@ -66,23 +61,23 @@
                 </div>
             </div>
         </div>
+        <!--Chat-->
         <div class="row justify-content-center">
-            <div class ="col-md-6">
-                    <div class="card" id="chatBox">
-                            <div class="card-body">
-                                    <p class="text-center">Say hello to your opponent!</p>
-                                    <div class="input-group mb-3" id="chatBoxInput">
-                                            <input type="text" class="form-control" placeholder="GLHF C:" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-info" type="button">Send</button>
-                                            </div>
-                                        </div>
+            <div class="col-md-8">
+                <div class="card" id="chatBox">
+                    <div class="card-body">
+                        <p class="text-center">Say hello to your opponent!</p>
+                        <div class="input-group mb-3" id="chatBoxInput">
+                            <input type="text" class="form-control" placeholder="GLHF C:" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-info" type="button">Send</button>
                             </div>
                         </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
 
     <!-- Added link to the Firebase Project -->
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
@@ -102,7 +97,7 @@
     <!-- Added link to the jQuery Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script type="text/javascript" src="./assets/javascript/game.js"></script>
+    <script type="text/javascript" src="./Assets/Javascript/game.js"></script>
 
 
 </body>

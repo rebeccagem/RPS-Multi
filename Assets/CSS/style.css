@@ -4,10 +4,9 @@ body{
 
 .jumbotron {
     padding: .6rem;
-    margin-top: 20px;
 }
 
-#userNameInput {
+#userNameInputContainer {
     margin-top:15px;
 }
 
@@ -29,10 +28,24 @@ border-color:rgb(163, 0, 0);
 }
 
 #chatBox{
-    margin:25px 0px;
+    margin-top:25px;
 }
 
 #chatBoxInput {
     display: flex;
     justify-content: flex-end;
+}
+
+/* add this class to card ids to show whose turn it is */
+.selected {
+    border: 5px solid #9c0404;
+}
+
+.welcomeDiv {
+    font-size:24px;
+    padding: 16.5px 0px;
+}
+
+.card {
+    box-shadow: 1px 5px 15px #927f0096;
 }
