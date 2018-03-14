@@ -84,13 +84,19 @@ $(document).ready(function () {
 
             case "oneRock": playerOne.choice = "rock";
                 console.log("ROCK WAS CLICKED BY PLAYER ONE");
+                playerOne.choice = "rock";
+                talkToDatabase();
                 break;
 
             case "onePaper": playerOne.choice = "paper";
                 console.log("PAPER WAS CLICKED BY PLAYER ONE");
+                playerOne.choice = "paper";
+                talkToDatabase();
                 break;
 
             case "oneScissors": playerOne.choice = "scissors";
+                playerOne.choice = "scissors";
+                talkToDatabase();
                 console.log("SCISSORS WAS CLICKED BY PLAYER ONE");
 
         }
@@ -98,22 +104,33 @@ $(document).ready(function () {
     });
 
     $(".twoButtonGrp").on("click", function () {
-        
+
         switch (this.value) {
 
-            case "twoRock": playerOne.choice = "rock";
-                console.log("ROCK WAS CLICKED BY PLAYER ONE");
+            case "twoRock": playerTwo.choice = "rock";
+                playerTwo.choice = "rock";
+                talkToDatabase();
+                console.log("ROCK WAS CLICKED BY PLAYER TWO");
                 break;
 
-            case "twoPaper": playerOne.choice = "paper";
-                console.log("PAPER WAS CLICKED BY PLAYER ONE");
+            case "twoPaper": playerTwo.choice = "paper";
+                playerTwo.choice = "paper";
+                talkToDatabase();
+                console.log("PAPER WAS CLICKED BY PLAYER TWO");
                 break;
 
-            case "twoScissors": playerOne.choice = "scissors";
-                console.log("SCISSORS WAS CLICKED BY PLAYER ONE");
+            case "twoScissors": playerTwo.choice = "scissors";
+                playerTwo.choice = "scissors";
+                talkToDatabase();
+                console.log("SCISSORS WAS CLICKED BY PLAYER TWO");
 
         }
     });
+
+    //comparing answers
+
+//make switchcase for win, loss, tie
+
 
     // Using .on("value", function(snapshot)) syntax will retrieve the data
     // from the database (both initially and every time something changes)
@@ -136,5 +153,17 @@ $(document).ready(function () {
         // In case of error this will print the error
         console.log("The read failed: " + errorObject.code);
     });
+
+    function talkToDatabase() {
+        database.ref().child("players").child("playerOne").set({
+            name: playerOne.name,
+            choice: playerOne.choice
+        });
+        database.ref().child("players").child("playerTwo").set({
+            name: playerTwo.name,
+            choice: playerTwo.choice
+        });
+    }
+
 
 });
