@@ -11,7 +11,7 @@ $(document).ready(function () {
     };
     var playerTwo = {
         name: " ",
-        choice: " ",
+        choice: "  ",
     };
 
     //push players with player one and player two into the database
@@ -31,7 +31,7 @@ $(document).ready(function () {
         if (playerOne.name === " ") {
             // Capture User Input and store them into variables
             playerOne.name = $("#userNameInput").val().trim();
-            console.log(playerOne.name);
+            
 
             ///LOCAL STORAGEEEEEE
             localStorage.setItem("playerOneName", playerOne.name);
@@ -56,7 +56,7 @@ $(document).ready(function () {
             console.log("There is already a player one");
             // Capture User Input and store them into variables
             playerTwo.name = $("#userNameInput").val().trim();
-            console.log(playerTwo.name);
+            
             $("#userNameInputContainer").hide();
 
             // Creat div to hold html welcome text
@@ -125,11 +125,12 @@ $(document).ready(function () {
                 console.log("SCISSORS WAS CLICKED BY PLAYER TWO");
 
         }
+
+
     });
 
     //comparing answers
 
-//make switchcase for win, loss, tie
 
 
     // Using .on("value", function(snapshot)) syntax will retrieve the data
@@ -142,9 +143,18 @@ $(document).ready(function () {
 
         // Then update the clickCounter variable with data from the database.
         playerOne = snapshot.val().players.playerOne;
-        // playerTwo = snapshot.val().players.playerTwo;
+        
+        console.log("before if!");
+        console.log(playerOne.choice);
+//make switchcase for win, loss, tie
+if(playerOne.choice===snapshot.val().players.playerTwo.choice){
+    console.log("It's a tie!");
+}
 
-        console.log(playerOne);
+// else if(playerOne.choice==="rock"&&playerTwo.choice==="paper"){
+//     console.log("PlayerTwoWins!");
+// }
+
 
         // If there is an error that Firebase runs into -- it will be stored in the "errorObject"
         // Again we could have named errorObject anything we wanted.
@@ -163,6 +173,7 @@ $(document).ready(function () {
             name: playerTwo.name,
             choice: playerTwo.choice
         });
+
     }
 
 
