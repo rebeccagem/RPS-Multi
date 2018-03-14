@@ -26,7 +26,8 @@
                     </h1>
                     <div class="row justify-content-center" id="underTitle">
                         <div class="input-group mb-3 col-md-7" id="userNameInputContainer">
-                            <input type="text" class="form-control" placeholder="What's your name?" aria-label="Recipient's username" aria-describedby="basic-addon2" id="userNameInput">
+                            <input type="text" class="form-control" placeholder="What's your name?" aria-label="Recipient's username" aria-describedby="basic-addon2"
+                                id="userNameInput">
                             <div class="input-group-append">
                                 <button class="btn btn-info btn-outline-secondary" type="submit" id="userNameSubmit">Submit</button>
                             </div>
@@ -39,11 +40,11 @@
             <!--Player 1 Info-->
             <div class="col-md-4">
                 <div class="card" id="playerOneCard">
-                    <div class="card-body">
-                        <div class="oneButtonGrp">
-                            <button type="button" id="oneRock" class="btn btn-info btn-lg btn-block">Rock</button>
-                            <button type="button" id="onePaper" class="btn btn-info btn-lg btn-block">Paper</button>
-                            <button type="button" id="oneScissors" class="btn btn-info btn-lg btn-block">Scissors</button>
+                    <div class="card-body" id="playerOneCardBody">
+                        <div>
+                            <button class="oneButtonGrp" value="oneRock" type="button" id="oneRock" class="btn btn-info btn-lg btn-block">Rock</button>
+                            <button class="oneButtonGrp" value="onePaper" type="button" id="onePaper" class="btn btn-info btn-lg btn-block">Paper</button>
+                            <button class="oneButtonGrp" value="oneScissors" type="button" id="oneScissors" class="btn btn-info btn-lg btn-block">Scissors</button>
                         </div>
                     </div>
                 </div>
@@ -51,11 +52,11 @@
             <!--Player 2 Info-->
             <div class="col-md-4">
                 <div class="card" id="playerTwoCard">
-                    <div class="card-body">
+                    <div class="card-body" id="playerTwoCardBody">
                         <div class="twoButtonGrp">
-                            <button type="button" id="twoRock" class="btn btn-info btn-lg btn-block">Rock</button>
-                            <button type="button" id="twoPaper" class="btn btn-info btn-lg btn-block">Paper</button>
-                            <button type="button" id="twoScissors" class="btn btn-info btn-lg btn-block">Scissors</button>
+                            <button class="twoButtonGrp" value="twoRock" type="button" id="twoRock" class="btn btn-info btn-lg btn-block">Rock</button>
+                            <button class="twoButtonGrp" value="twoPaper" type="button" id="twoPaper" class="btn btn-info btn-lg btn-block">Paper</button>
+                            <button class="twoButtonGrp" value="twoScissors" type="button" id="twoScissors" class="btn btn-info btn-lg btn-block">Scissors</button>
                         </div>
                     </div>
                 </div>

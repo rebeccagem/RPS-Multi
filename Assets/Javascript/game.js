@@ -1,16 +1,17 @@
 $(document).ready(function () {
- $(".oneButtonGrp").hide();
- $(".twoButtonGrp").hide();
+    $(".oneButtonGrp").hide();
+    $(".twoButtonGrp").hide();
 
-    
     // Create a variable to reference the database.
     var database = firebase.database();
 
     var playerOne = {
         name: " ",
+        choice: " ",
     };
     var playerTwo = {
         name: " ",
+        choice: " ",
     };
 
     //push players with player one and player two into the database
@@ -26,9 +27,7 @@ $(document).ready(function () {
         // prevent form from trying to submit/refresh the page
         event.preventDefault();
 
-        console.log("Player One: " + playerOne.name);
-        console.log("Player Two: " + playerTwo.name);
-
+        //creates PLAYER ONE
         if (playerOne.name === " ") {
             // Capture User Input and store them into variables
             playerOne.name = $("#userNameInput").val().trim();
@@ -42,13 +41,16 @@ $(document).ready(function () {
             welcomeDiv.append("Hello, " + localStorage.getItem("playerOneName") + ". You are Player 1!");
             $("#underTitle").append(welcomeDiv);
 
-            //       // Code for handling the push
+            // Code for handling the push
             database.ref().child("players").child("playerOne").set({
                 name: playerOne.name
             });
             $(".oneButtonGrp").show();
+            var waitingTwoDiv = $("<div>").addClass("waitingTwoDiv");
+            waitingTwoDiv.append("Waiting for your opponent...");
+            $("#playerTwoCardBody").append(waitingTwoDiv);
         }
-
+        //creates PLAYER TWO
         else {
             //checks local storage for player 2 and if there is one, passes info to firebase
             console.log("There is already a player one");
@@ -67,9 +69,50 @@ $(document).ready(function () {
             database.ref().child("players").child("playerTwo").set({
                 name: playerTwo.name
             });
-        $(".twoButtonGrp").show();
-    }
+            $(".twoButtonGrp").show();
+            var waitingOneDiv = $("<div>").addClass("waitingOneDiv");
+            waitingOneDiv.append("Waiting for your opponent...");
+            $("#playerOneCardBody").append(waitingOneDiv);
+        }
+
+    });
+
+
+    $(".oneButtonGrp").on("click", function () {
+
+        switch (this.value) {
+
+            case "oneRock": playerOne.choice = "rock";
+                console.log("ROCK WAS CLICKED BY PLAYER ONE");
+                break;
+
+            case "onePaper": playerOne.choice = "paper";
+                console.log("PAPER WAS CLICKED BY PLAYER ONE");
+                break;
+
+            case "oneScissors": playerOne.choice = "scissors";
+                console.log("SCISSORS WAS CLICKED BY PLAYER ONE");
+
+        }
+
+    });
+
+    $(".twoButtonGrp").on("click", function () {
         
+        switch (this.value) {
+
+            case "twoRock": playerOne.choice = "rock";
+                console.log("ROCK WAS CLICKED BY PLAYER ONE");
+                break;
+
+            case "twoPaper": playerOne.choice = "paper";
+                console.log("PAPER WAS CLICKED BY PLAYER ONE");
+                break;
+
+            case "twoScissors": playerOne.choice = "scissors";
+                console.log("SCISSORS WAS CLICKED BY PLAYER ONE");
+
+        }
     });
 
     // Using .on("value", function(snapshot)) syntax will retrieve the data

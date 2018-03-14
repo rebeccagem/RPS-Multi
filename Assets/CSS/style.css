@@ -57,3 +57,13 @@ border-color:rgb(163, 0, 0);
 #playerTwoCard {
     height:200px;
 }
+
+.waitingOneDiv {
+    font-size:24px;
+    padding: 16.5px 0px;
+}
+
+.waitingTwoDiv {
+    font-size:24px;
+    padding: 16.5px 0px;
+}
