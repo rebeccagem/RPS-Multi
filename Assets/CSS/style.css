@@ -49,3 +49,11 @@ border-color:rgb(163, 0, 0);
 .card {
     box-shadow: 1px 5px 15px #927f0096;
 }
+
+#playerOneCard {
+    height:200px;
+}
+
+#playerTwoCard {
+    height:200px;
+}

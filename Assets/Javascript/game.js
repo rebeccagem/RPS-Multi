@@ -1,5 +1,8 @@
 $(document).ready(function () {
+ $(".oneButtonGrp").hide();
+ $(".twoButtonGrp").hide();
 
+    
     // Create a variable to reference the database.
     var database = firebase.database();
 
@@ -43,10 +46,10 @@ $(document).ready(function () {
             database.ref().child("players").child("playerOne").set({
                 name: playerOne.name
             });
+            $(".oneButtonGrp").show();
         }
 
         else {
-
             //checks local storage for player 2 and if there is one, passes info to firebase
             console.log("There is already a player one");
             // Capture User Input and store them into variables
@@ -64,7 +67,9 @@ $(document).ready(function () {
             database.ref().child("players").child("playerTwo").set({
                 name: playerTwo.name
             });
-        }
+        $(".twoButtonGrp").show();
+    }
+        
     });
 
     // Using .on("value", function(snapshot)) syntax will retrieve the data
@@ -88,13 +93,5 @@ $(document).ready(function () {
         // In case of error this will print the error
         console.log("The read failed: " + errorObject.code);
     });
-
-    // function showWelcomeOne() {
-    //     $("#userNameInputContainer").hide();
-    //     // Creat div to hold html welcome text
-    //     var welcomeDiv = $("<div>").addClass("welcomeDiv");
-    //     welcomeDiv.append("Hello, " + localStorage.getItem("playerOneName") + ". You are Player 1!");
-    //     $("#underTitle").append(welcomeDiv);
-    // }
 
 });
