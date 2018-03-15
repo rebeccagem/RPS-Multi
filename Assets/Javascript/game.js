@@ -8,12 +8,50 @@ $(document).ready(function () {
     var playerOne = {
         name: " ",
         choice: " ",
+        win: 0,
+        loss: 0,
+        tie: 0,
     };
     var playerTwo = {
         name: " ",
         choice: "  ",
+        win: 0,
+        loss: 0,
+        tie: 0,
     };
 
+
+    var refChat = database.ref("chat");
+    var chatData = {};
+    var chatBox;
+
+    $("#chatBtn").on("click", function () {
+        chatBox = $("#chatInput").val().trim();
+        console.log(chatBox);
+        chatData = {
+            chatText: chatBox
+        };
+        refChat.push(chatData);
+        $("#chatInput").val(" ");
+    });
+
+    refChat.on("value", updateChatBox, errData);
+
+    function updateChatBox(data){
+        $("#chatBoxArea").empty();
+        var showChat = data.val();
+        var keys = Object.keys(showChat);
+        for (var i = 0; i < keys.length; i++) {
+            var k = keys[i];
+            var chatLog = showChat[k].chatText;
+            $("#chatBoxArea").append("<p>" + chatLog + "</p>");
+            console.log(chatLog);
+        }
+    }
+
+    function errData(err) {
+        console.log("ERROR");
+    }
     //push players with player one and player two into the database
 
     // Code for handling the push
@@ -31,7 +69,7 @@ $(document).ready(function () {
         if (playerOne.name === " ") {
             // Capture User Input and store them into variables
             playerOne.name = $("#userNameInput").val().trim();
-            
+
 
             ///LOCAL STORAGEEEEEE
             localStorage.setItem("playerOneName", playerOne.name);
@@ -56,7 +94,7 @@ $(document).ready(function () {
             console.log("There is already a player one");
             // Capture User Input and store them into variables
             playerTwo.name = $("#userNameInput").val().trim();
-            
+
             $("#userNameInputContainer").hide();
 
             // Creat div to hold html welcome text
@@ -133,6 +171,8 @@ $(document).ready(function () {
 
 
 
+
+
     // Using .on("value", function(snapshot)) syntax will retrieve the data
     // from the database (both initially and every time something changes)
     // This will then store the data inside the variable "snapshot". We could rename "snapshot" to anything.
@@ -143,28 +183,68 @@ $(document).ready(function () {
 
         // Then update the clickCounter variable with data from the database.
         playerOne = snapshot.val().players.playerOne;
-        
+
         console.log("before if!");
-        console.log(playerOne.choice,snapshot.val().players.playerTwo.choice);
-//make switchcase for win, loss, tie
-if (snapshot.val().players.playerOne.choice === undefined || snapshot.val().players.playerTwo.choice === undefined){
-    console.log("WE ARE UNDEFINED NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-}
-else if(snapshot.val().players.playerOne.choice===snapshot.val().players.playerTwo.choice){
-    console.log("It's a tie!");
-}
-else if(snapshot.val().players.playerOne.choice === "rock" && snapshot.val().players.playerTwo.choice === "paper"){
-    console.log("Player two wins!")
-}
-else if(snapshot.val().players.playerOne.choice === "paper" && snapshot.val().players.playerTwo.choice === "scissors"){
-    console.log("Player two wins!")
-}
-else if(snapshot.val().players.playerOne.choice === "scissors" && snapshot.val().players.playerTwo.choice === "rock"){
-    console.log("Player two wins!")
-}
-// else if(playerOne.choice==="rock"&&playerTwo.choice==="paper"){
-//     console.log("PlayerTwoWins!");
-// }
+        console.log(playerOne.choice, snapshot.val().players.playerTwo.choice);
+
+
+        // check to see if choices have been made
+        if (snapshot.val().players.playerOne.choice === undefined || snapshot.val().players.playerTwo.choice === undefined) {
+            console.log("WE ARE UNDEFINED NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        }
+        else {
+            switch (snapshot.val().players.playerOne.choice) {
+                case "rock": switch (snapshot.val().players.playerTwo.choice) {
+                    case "rock": console.log("It's a tie!");
+                        playerOne.tie++;
+                        playerTwo.tie++;
+                        break;
+                    case "paper": console.log("Player Two Wins!");
+                        playerTwo.win++;
+                        playerOne.loss++;
+                        break;
+                    case "scissors": console.log("Player One Wins!");
+                        playerOne.win++;
+                        playerTwo.loss++;
+                }
+                    break;
+                case "paper": switch (snapshot.val().players.playerTwo.choice) {
+                    case "rock": console.log("Player One Wins!");
+                        playerOne.win++;
+                        playerTwo.loss++;
+                        console.log(playerOne, playerTwo);
+                        break;
+                    case "paper": console.log("It's a tie!");
+                        playerOne.tie++;
+                        playerTwo.tie++;
+                        console.log(playerOne, playerTwo);
+                        break;
+                    case "scissors": console.log("Player Two Wins!");
+                        playerTwo.win++;
+                        playerOne.loss++;
+                        console.log(playerOne, playerTwo);
+                }
+                    break;
+                case "scissors": switch (snapshot.val().players.playerTwo.choice) {
+                    case "rock": console.log("Player Two Wins!");
+                        playerTwo.win++;
+                        playerOne.loss++;
+                        break;
+                    case "paper": console.log("Player One Wins!");
+                        playerOne.win++;
+                        playerTwo.loss++;
+                        break;
+                    case "scissors": console.log("It's a tie!");
+                        playerOne.tie++;
+                        playerTwo.tie++;
+                }
+            }
+        }
+
+
+        // else if(playerOne.choice==="rock"&&playerTwo.choice==="paper"){
+        //     console.log("PlayerTwoWins!");
+        // }
 
 
         // If there is an error that Firebase runs into -- it will be stored in the "errorObject"
@@ -189,3 +269,21 @@ else if(snapshot.val().players.playerOne.choice === "scissors" && snapshot.val()
 
 
 });
+
+
+//make switchcase for win, loss, tie
+// if (snapshot.val().players.playerOne.choice === undefined || snapshot.val().players.playerTwo.choice === undefined){
+//     console.log("WE ARE UNDEFINED NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+// }
+// else if(snapshot.val().players.playerOne.choice===snapshot.val().players.playerTwo.choice){
+//     console.log("It's a tie!");
+// }
+// else if(snapshot.val().players.playerOne.choice === "rock" && snapshot.val().players.playerTwo.choice === "paper"){
+//     console.log("Player two wins!")
+// }
+// else if(snapshot.val().players.playerOne.choice === "paper" && snapshot.val().players.playerTwo.choice === "scissors"){
+//     console.log("Player two wins!")
+// }
+// else if(snapshot.val().players.playerOne.choice === "scissors" && snapshot.val().players.playerTwo.choice === "rock"){
+//     console.log("Player two wins!")
+// }
