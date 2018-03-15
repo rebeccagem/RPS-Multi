@@ -145,12 +145,23 @@ $(document).ready(function () {
         playerOne = snapshot.val().players.playerOne;
         
         console.log("before if!");
-        console.log(playerOne.choice);
+        console.log(playerOne.choice,snapshot.val().players.playerTwo.choice);
 //make switchcase for win, loss, tie
-if(playerOne.choice===snapshot.val().players.playerTwo.choice){
+if (snapshot.val().players.playerOne.choice === undefined || snapshot.val().players.playerTwo.choice === undefined){
+    console.log("WE ARE UNDEFINED NOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+}
+else if(snapshot.val().players.playerOne.choice===snapshot.val().players.playerTwo.choice){
     console.log("It's a tie!");
 }
-
+else if(snapshot.val().players.playerOne.choice === "rock" && snapshot.val().players.playerTwo.choice === "paper"){
+    console.log("Player two wins!")
+}
+else if(snapshot.val().players.playerOne.choice === "paper" && snapshot.val().players.playerTwo.choice === "scissors"){
+    console.log("Player two wins!")
+}
+else if(snapshot.val().players.playerOne.choice === "scissors" && snapshot.val().players.playerTwo.choice === "rock"){
+    console.log("Player two wins!")
+}
 // else if(playerOne.choice==="rock"&&playerTwo.choice==="paper"){
 //     console.log("PlayerTwoWins!");
 // }
