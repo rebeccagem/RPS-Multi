@@ -1,50 +1,53 @@
 $(document).ready(function () {
     $(".oneButtonGrp").hide();
     $(".twoButtonGrp").hide();
-
+    $("#chatBox").hide();
     // Create a variable to reference the database.
     var database = firebase.database();
 
     var playerOne = {
         name: " ",
         choice: " ",
-        win: 0,
-        loss: 0,
-        tie: 0,
     };
     var playerTwo = {
         name: " ",
         choice: "  ",
-        win: 0,
-        loss: 0,
-        tie: 0,
     };
 
 
     var refChat = database.ref("chat");
     var chatData = {};
     var chatBox;
+    var chatPlayerOne;
 
     $("#chatBtn").on("click", function () {
         chatBox = $("#chatInput").val().trim();
-        console.log(chatBox);
+        if (chatPlayerOne === true){
+            chatBox = playerOne.name+": " + chatBox;
+        }
+        else{
+            chatBox = playerTwo.name+": " + chatBox;
+        }    
+        console.log(playerOne.name);
         chatData = {
             chatText: chatBox
         };
         refChat.push(chatData);
         $("#chatInput").val(" ");
+
     });
 
     refChat.on("value", updateChatBox, errData);
 
-    function updateChatBox(data){
+    function updateChatBox(data) {
         $("#chatBoxArea").empty();
         var showChat = data.val();
-        var keys = Object.keys(showChat);
+        var keys = Object.keys(showChat);   
         for (var i = 0; i < keys.length; i++) {
             var k = keys[i];
             var chatLog = showChat[k].chatText;
-            $("#chatBoxArea").append("<p>" + chatLog + "</p>");
+
+            $("#chatBoxArea").append("<p>"+chatLog + "</p>");
             console.log(chatLog);
         }
     }
@@ -78,15 +81,20 @@ $(document).ready(function () {
             var welcomeDiv = $("<div>").addClass("welcomeDiv");
             welcomeDiv.append("Hello, " + localStorage.getItem("playerOneName") + ". You are Player 1!");
             $("#underTitle").append(welcomeDiv);
+            chatPlayerOne = true;
 
             // Code for handling the push
             database.ref().child("players").child("playerOne").set({
                 name: playerOne.name
             });
             $(".oneButtonGrp").show();
+            $("#chatBox").show();
+
             var waitingTwoDiv = $("<div>").addClass("waitingTwoDiv");
             waitingTwoDiv.append("Waiting for your opponent...");
             $("#playerTwoCardBody").append(waitingTwoDiv);
+
+
         }
         //creates PLAYER TWO
         else {
@@ -101,6 +109,7 @@ $(document).ready(function () {
             var welcomeDiv = $("<div>").addClass("welcomeDiv");
             welcomeDiv.append("Hello, " + playerTwo.name + ". You are Player 2!");
             $("#underTitle").append(welcomeDiv);
+            chatPlayerOne = false;
 
             localStorage.setItem("playerTwoName", playerTwo.name);
             // Code for handling the push
@@ -108,6 +117,7 @@ $(document).ready(function () {
                 name: playerTwo.name
             });
             $(".twoButtonGrp").show();
+            $("#chatBox").show();
             var waitingOneDiv = $("<div>").addClass("waitingOneDiv");
             waitingOneDiv.append("Waiting for your opponent...");
             $("#playerOneCardBody").append(waitingOneDiv);
@@ -196,55 +206,39 @@ $(document).ready(function () {
             switch (snapshot.val().players.playerOne.choice) {
                 case "rock": switch (snapshot.val().players.playerTwo.choice) {
                     case "rock": console.log("It's a tie!");
-                        playerOne.tie++;
-                        playerTwo.tie++;
+                    // $("<div>").addClass("waitingTwoDiv").append("It's a tie.");
+                    $("#playerTwoCardBody").text("It's a tie.");
                         break;
                     case "paper": console.log("Player Two Wins!");
-                        playerTwo.win++;
-                        playerOne.loss++;
+                    $("#playerTwoCardBody").text("Player Two Wins!");
                         break;
                     case "scissors": console.log("Player One Wins!");
-                        playerOne.win++;
-                        playerTwo.loss++;
+                    $("#playerTwoCardBody").text("Player One Wins!");
                 }
                     break;
                 case "paper": switch (snapshot.val().players.playerTwo.choice) {
                     case "rock": console.log("Player One Wins!");
-                        playerOne.win++;
-                        playerTwo.loss++;
-                        console.log(playerOne, playerTwo);
+                    $("#playerTwoCardBody").text("Player One Wins!");
                         break;
                     case "paper": console.log("It's a tie!");
-                        playerOne.tie++;
-                        playerTwo.tie++;
-                        console.log(playerOne, playerTwo);
+                    $("#playerTwoCardBody").text("It's a tie.");
                         break;
                     case "scissors": console.log("Player Two Wins!");
-                        playerTwo.win++;
-                        playerOne.loss++;
-                        console.log(playerOne, playerTwo);
+                    $("#playerTwoCardBody").text("Player Two Wins!");
                 }
                     break;
                 case "scissors": switch (snapshot.val().players.playerTwo.choice) {
                     case "rock": console.log("Player Two Wins!");
-                        playerTwo.win++;
-                        playerOne.loss++;
+                    $("#playerTwoCardBody").text("Player Two Wins!");
                         break;
                     case "paper": console.log("Player One Wins!");
-                        playerOne.win++;
-                        playerTwo.loss++;
+                    $("#playerTwoCardBody").text("Player One Wins!");
                         break;
                     case "scissors": console.log("It's a tie!");
-                        playerOne.tie++;
-                        playerTwo.tie++;
+                    $("#playerTwoCardBody").text("It's a tie.");
                 }
             }
         }
-
-
-        // else if(playerOne.choice==="rock"&&playerTwo.choice==="paper"){
-        //     console.log("PlayerTwoWins!");
-        // }
 
 
         // If there is an error that Firebase runs into -- it will be stored in the "errorObject"
